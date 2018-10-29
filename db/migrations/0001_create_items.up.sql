@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS items (
+   id UUID NOT NULL,
+   task TEXT NOT NULL,
+   completed BOOLEAN NOT NULL,
+   PRIMARY KEY (id)
+);
