@@ -6,7 +6,9 @@ var ErrItemNotFound = errors.New("Item not found")
 
 type ItemsStore interface {
 	Insert(*Item) error
+	EditByID(string, *Item) (*Item, error)
 	FindByID(string) (*Item, error)
+	FindByIDs([]string) ([]*Item, error)
 }
 
 type ItemsStoreManager struct {
@@ -22,6 +24,14 @@ func (ism ItemsStoreManager) Insert(i *Item) error {
 	return nil
 }
 
+func (ism ItemsStoreManager) EditByID(id string, item *Item) (*Item, error) {
+	return ism.PostgresStorage.EditByID(id, item)
+}
+
 func (ism ItemsStoreManager) FindByID(id string) (*Item, error) {
 	return ism.PostgresStorage.FindByID(id)
+}
+
+func (ism ItemsStoreManager) FindByIDs(ids []string) ([]*Item, error) {
+	return ism.PostgresStorage.FindByIDs(ids)
 }

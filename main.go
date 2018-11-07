@@ -28,8 +28,10 @@ func main() {
 	e := echo.New()
 
 	e.GET("/healthz", api.Healthz)
-	e.POST("/items", api.CreateItems(itemsStoreManager))
-	e.GET("/items/:id", api.ShowItems(itemsStoreManager))
+	e.POST("/items", api.CreateItemsHandler(itemsStoreManager))
+	e.GET("/items/:id", api.ShowItemHandler(itemsStoreManager))
+	e.PUT("/items/:id", api.EditItemHandler(itemsStoreManager))
+	e.GET("/items/", api.IndexItemsHandler(itemsStoreManager))
 
 	e.Start(":8080")
 }
